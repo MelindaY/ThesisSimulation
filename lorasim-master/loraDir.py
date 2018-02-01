@@ -299,7 +299,7 @@ class myNode():
                 node_color = 'yellow'
             if self.packet.sf==9:
                 node_marker='^'
-                node_color = 'green'
+                node_color = 'pink'
             if self.packet.sf==10:
                 node_marker='<'
                 node_color = 'orange'
@@ -308,10 +308,9 @@ class myNode():
                 node_color = 'purple'
             if self.packet.sf==12:
                 node_marker='8'
-                node_color = 'pink'
+                node_color = 'brown'
             scale = 200.0
-            plt.scatter(self.x, self.y, alpha=0.3,s=scale,label='SF='+str(self.packet.sf),color=node_color, edgecolors='none')
-
+            plt.scatter(self.x, self.y, alpha=0.6,s=scale,label='SF='+str(self.packet.sf),color=node_color, edgecolors='none')
 #
 # this function creates a packet (associated with a node)
 # it also sets all parameters, currently random
@@ -682,7 +681,9 @@ if __name__ == "__main__":
         # 1000000 = 16 min
         node = myNode(i, bsId, avgSendTime, 20)
         nodes.append(node)
+    if experiment ==8:
         scheduleSF(nodes)
+    for i in range(0, nrNodes):
         env.process(transmit(env, node))
 
     # prepare show
@@ -694,9 +695,10 @@ if __name__ == "__main__":
         plt.title('Deployment')  # 显示图表标题
         plt.xlabel('Distance(m)')  # x轴名称
         plt.ylabel('Distance(m)')  # y轴名称
+        plt.legend()
         plt.grid(True)  # 显示网格线
         plt.show()
-        plt.savefig(str(nrNodes)+"nodes"+".svg")
+        plt.savefig('nodes.svg')
 
     # start simulation
     env.run(until=simtime)
