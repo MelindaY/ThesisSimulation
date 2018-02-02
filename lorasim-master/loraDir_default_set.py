@@ -238,23 +238,13 @@ def airtime(sf, cr, pl, bw):
     return Tpream + Tpayload
 
 
-#
-# this function creates a node
-#
-class myNode():
-    def __init__(self, nodeid, bs, period,packetlen):
-        self.nodeid = nodeid
-        self.period = period
-        self.bs = bs
-        self.x = 0
-        self.y = 0
-        self.sf=0
-
-        # this is very complex prodecure for placing nodes
-        # and ensure minimum distance between each pair of nodes
-        found = 0
-        rounds = 0
-        global nodes
+# this is very complex prodecure for placing nodes
+# and ensure minimum distance between each pair of nodes
+def w_deploym_tofile(numNodes):
+    found = 0
+    rounds = 0
+    fname = "data/" + "nodes" + str(nrNodes) + ".txt"
+    while numNodes!=0:
         while (found == 0 and rounds < 100):
             a = random.random()
             b = random.random()
@@ -265,10 +255,10 @@ class myNode():
             if len(nodes) > 0:
                 for index, n in enumerate(nodes):
                     dist = np.sqrt(((abs(n.x - posx)) ** 2) + ((abs(n.y - posy)) ** 2))
-                    if dist >= 10:
+                    if dist >= 50:
                         found = 1
-                        self.x = posx
-                        self.y = posy
+                        x = posx
+                        y = posy
                     else:
                         rounds = rounds + 1
                         if rounds == 100:
@@ -276,46 +266,96 @@ class myNode():
                             exit(-1)
             else:
                 print("first node")
-                self.x = posx
-                self.y = posy
+                x = posx
+                y = posy
                 found = 1
+            res = "\n" + str(x) + " " + str(y)
+            with open(fname, 'a') as myfile:
+                myfile.write(res)
+            numNodes-=1
+    myfile.close()
 
-        self.dist = np.sqrt((self.x - bsx) * (self.x - bsx) + (self.y - bsy) * (self.y - bsy))
-        print('node %d' % nodeid, "x", self.x, "y", self.y, "dist: ", self.dist)
-        self.packet = myPacket(self.nodeid, self.dist,packetlen)
-        self.packet.other_settings(packetlen)
-        self.sent = 0
-
-        # graphics for node
-        global graphics
-        if (graphics == 1):
-            node_marker=''
-            node_color=''
-            if self.packet.sf==7:
-                node_marker='o'
-                node_color ='blue'
-            if self.packet.sf==8:
-                node_marker='v'
-                node_color = 'yellow'
-            if self.packet.sf==9:
-                node_marker='^'
-                node_color = 'pink'
-            if self.packet.sf==10:
-                node_marker='<'
-                node_color = 'orange'
-            if self.packet.sf==11:
-                node_marker='>'
-                node_color = 'purple'
-            if self.packet.sf==12:
-                node_marker='8'
-                node_color = 'brown'
-            scale = 200.0
-            plt.scatter(self.x, self.y, alpha=0.6,s=scale,label='SF='+str(self.packet.sf),color=node_color, edgecolors='none')
+# this function creates a node
 #
+class myNode():
+    def __init__(self, nodeid, bs, period,packetlen):
+        self.nodeid = nodeid
+        self.period = period
+        self.bs = bs
+        self.x = 0
+        self.y = 0#
 # this function creates a packet (associated with a node)
 # it also sets all parameters, currently random
 #
 
+def nodes_setting(nodes,packetlen):
+    for node in nodes:
+        node.dist = np.sqrt((node.x - bsx) * (node.x - bsx) + (node.y - bsy) * (node.y - bsy))
+        node.packet = myPacket(node.nodeid, node.dist, packetlen)
+        node.sent = 0
+def color_nodes(nodes):
+    # graphics for node
+    nodes_7x=[]
+    nodes_7y = []
+    nodes_8x = []
+    nodes_8y = []
+    nodes_9x = []
+    nodes_9y = []
+    nodes_10x = []
+    nodes_10y = []
+    nodes_11x = []
+    nodes_11y = []
+    nodes_12x= []
+    nodes_12y = []
+    nodes_color=['blue','yellow','pink','orange','purple','brown']
+    for node in nodes:
+        if node.packet.sf == 7:
+           nodes_7x.append(node.x)
+           nodes_7y.append(node.x)
+        if node.packet.sf == 8:
+            nodes_8x.append(node.x)
+            nodes_8y.append(node.x)
+        if node.packet.sf == 9:
+            nodes_9x.append(node.x)
+            nodes_9y.append(node.x)
+        if node.packet.sf == 10:
+            nodes_10x.append(node.x)
+            nodes_10y.append(node.x)
+        if node.packet.sf == 11:
+            nodes_11x.append(node.x)
+            nodes_11y.append(node.x)
+        if node.packet.sf == 12:
+            nodes_12x.append(node.x)
+            nodes_12y.append(node.x)
+        scale = 200.0
+        plt.scatter( nodes_7x, nodes_7y, alpha=0.6, s=scale, label='SF=7', color=nodes_color[0],
+                    edgecolors='none')
+        plt.scatter(nodes_8x, nodes_8y, alpha=0.6, s=scale, label='SF=8', color=nodes_color[1],
+                   edgecolors='none')
+        plt.scatter(nodes_9x, nodes_9y, alpha=0.6, s=scale, label='SF=9', color=nodes_color[2],
+                   edgecolors='none')
+        plt.scatter(nodes_10x, nodes_10y, alpha=0.6, s=scale, label='SF=10', color=nodes_color[3],
+                   edgecolors='none')
+        plt.scatter(nodes_11x, nodes_11y, alpha=0.6, s=scale, label='SF=11', color=nodes_color[4],
+                   edgecolors='none')
+        plt.scatter(nodes_12x, nodes_12y, alpha=0.6, s=scale, label='SF=12', color=nodes_color[5],
+                   edgecolors='none')
+        plt.legend()
+        plt.grid(True)
+
+
+def nodes_deploy(nodes):
+    fname = "data/" + "nodes" + str(nodes) + ".txt"
+    if os.path.isfile(fname)!=True:
+        print("deployment file doesn't exist!")
+        exit(-1)
+    with open(fname, 'r') as myfile:
+        i=0
+        for deploy_xy in myfile:
+            x,y = deploy_xy.strip().split(' ')
+            nodes[i].x=x
+            node[i].y=y
+    myfile.close()
 
 class myPacket():
     global experiment
@@ -673,15 +713,25 @@ if __name__ == "__main__":
         # ax.add_artist(plt.Circle((bsx, bsy), 3, fill=True, color='green'))
         # ax.add_artist(plt.Circle((bsx, bsy), maxDist, fill=False, color='green'))
 
+
     for i in range(0, nrNodes):
         # myNode takes period (in ms), base station id packetlen (in Bytes)
         # 1000000 = 16 min
         node = myNode(i, bsId, avgSendTime, 20)
         nodes.append(node)
-    for i in range(0,nrNodes):
-         print("SF: " + str(nodes[i].packet.sf))
+    # generate the file to deploy nodes
+    w_deploym_tofile(nrNodes)
+    # use the file to deploy
+    nodes_deploy(nodes)
+    # set nodes parameters
+    nodes_setting(nodes,20)
+
     if experiment ==8:
         scheduleSF(nodes)
+    for i in range(0,nrNodes):
+         nodes[i].packetother_settings(20)
+         print("SF: " + str(nodes[i].packet.sf))
+    color_nodes(nodes)
     for i in range(0, nrNodes):
         env.process(transmit(env, node))
 

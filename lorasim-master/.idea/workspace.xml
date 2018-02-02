@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/test.py" line="7" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="dff3bb0e-a408-40b2-ab81-8b3070a042e2" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,22 +27,42 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="loraDir.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="loraDir.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/loraDir.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="313" column="1" lean-forward="true" selection-start-line="313" selection-start-column="1" selection-end-line="313" selection-end-column="1" />
+            <state relative-caret-position="580">
+              <caret line="314" column="29" lean-forward="true" selection-start-line="282" selection-start-column="7" selection-end-line="314" selection-end-column="29" />
               <folding>
                 <element signature="e#5915#6146#0" expanded="false" />
                 <element signature="e#6181#7265#0" expanded="false" />
                 <element signature="e#7301#8194#0" expanded="false" />
                 <element signature="e#8320#9013#0" expanded="false" />
-                <element signature="e#13071#13133#0" expanded="false" />
-                <element signature="e#13224#13285#0" expanded="false" />
-                <element signature="e#13344#13406#0" expanded="false" />
-                <element signature="e#16076#16457#0" expanded="false" />
-                <element signature="e#16493#16653#0" expanded="false" />
-                <element signature="e#16696#16726#0" expanded="false" />
+                <element signature="e#13061#13123#0" expanded="false" />
+                <element signature="e#13214#13275#0" expanded="false" />
+                <element signature="e#13334#13396#0" expanded="false" />
+                <element signature="e#16102#16483#0" expanded="false" />
+                <element signature="e#16519#16679#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="loraDir_default_set.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/loraDir_default_set.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="348" column="7" lean-forward="false" selection-start-line="346" selection-start-column="0" selection-end-line="357" selection-end-column="18" />
+              <folding>
+                <element signature="e#3349#5157#0" expanded="false" />
+                <element signature="e#5384#5832#0" expanded="false" />
+                <element signature="e#5915#6146#0" expanded="false" />
+                <element signature="e#6181#7265#0" expanded="false" />
+                <element signature="e#7301#8194#0" expanded="false" />
+                <element signature="e#8320#9013#0" expanded="false" />
+                <element signature="e#10755#10956#0" expanded="false" />
+                <element signature="e#18699#20646#0" expanded="false" />
+                <element signature="e#20797#22489#0" expanded="false" />
+                <element signature="e#24779#25161#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -69,11 +86,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="test.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="9" column="42" lean-forward="true" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="42" />
+            <state relative-caret-position="38">
+              <caret line="71" column="15" lean-forward="false" selection-start-line="71" selection-start-column="15" selection-end-line="71" selection-end-column="15" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -90,20 +107,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="node-bin-packing-first-fit-biased.ipynb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node-bin-packing-first-fit-biased.ipynb">
-          <provider selected="true" editor-type-id="ipnb-editor">
-            <state>
-              <selected id="0" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LoraSim-test-independent.ipynb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LoraSim-test-independent.ipynb">
-          <provider selected="true" editor-type-id="ipnb-editor">
-            <state>
-              <selected id="0" />
+      <file leaf-file-name="loraDirMulBS.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/loraDirMulBS.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="572">
+              <caret line="203" column="18" lean-forward="false" selection-start-line="203" selection-start-column="18" selection-end-line="203" selection-end-column="18" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -138,36 +147,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>GW</find>
-      <find>myPacket</find>
-      <find>node</find>
-      <find>myNode</find>
-      <find>proc</find>
-      <find>processed</find>
-      <find>ax.add_artist</find>
-      <find>show</find>
-      <find>graphics</find>
-      <find>plot</find>
-      <find>std</find>
-      <find>sys</find>
-      <find>graphics == 1</find>
-      <find>plt</find>
-      <find>7</find>
-      <find>^</find>
-      <find>range</find>
-      <find>sensi</find>
-      <find>rssi</find>
-      <find>Ptx</find>
-      <find>experiment</find>
-      <find>proce</find>
-      <find>receive</find>
-      <find>fre</find>
-      <find>r</find>
       <find>freq</find>
       <find>SF</find>
       <find>LABE</find>
       <find>ax</find>
       <find>ax.</find>
+      <find>savefig</find>
+      <find>scheduleSF</find>
+      <find>myNode</find>
+      <find>choice</find>
+      <find>experiment ==8</find>
+      <find>schedule</find>
+      <find>reset_sf_fromGW</find>
+      <find>experiment =</find>
+      <find>experiment</find>
+      <find>random</find>
+      <find>po</find>
+      <find>round</find>
+      <find>.dat</find>
+      <find>n.x</find>
+      <find>bsx</find>
+      <find>file</find>
+      <find>isfile</find>
+      <find>fname</find>
+      <find>with</find>
+      <find>packetsAtBS</find>
+      <find>myfile</find>
+      <find>packetlen</find>
+      <find>w_deploym_tofile</find>
+      <find>deploy</find>
+      <find>deplo</find>
     </findStrings>
     <replaceStrings>
       <replace>max_index</replace>
@@ -180,8 +189,9 @@
         <option value="$PROJECT_DIR$/lorasim_engine.py" />
         <option value="$PROJECT_DIR$/loraDirMulBS.py" />
         <option value="$PROJECT_DIR$/LoraSim-random-freq.ipynb" />
-        <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/loraDir.py" />
+        <option value="$PROJECT_DIR$/loraDir_default_set.py" />
+        <option value="$PROJECT_DIR$/test.py" />
       </list>
     </option>
   </component>
@@ -466,11 +476,12 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.247782" sideWeight="0.4943274" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16958277" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.08882907" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2678331" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15074024" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24968071" sideWeight="0.50567263" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39973083" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -478,7 +489,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -631,16 +641,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/loraDirMulBS.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7410">
-          <caret line="203" column="18" lean-forward="false" selection-start-line="203" selection-start-column="18" selection-end-line="203" selection-end-column="18" />
-          <folding>
-            <element signature="e#2373#2385#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/competition_independent_2bs_generator.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
@@ -733,31 +733,57 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="9" column="42" lean-forward="true" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/loraDir.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="313" column="1" lean-forward="true" selection-start-line="313" selection-start-column="1" selection-end-line="313" selection-end-column="1" />
+        <state relative-caret-position="580">
+          <caret line="314" column="29" lean-forward="true" selection-start-line="282" selection-start-column="7" selection-end-line="314" selection-end-column="29" />
           <folding>
             <element signature="e#5915#6146#0" expanded="false" />
             <element signature="e#6181#7265#0" expanded="false" />
             <element signature="e#7301#8194#0" expanded="false" />
             <element signature="e#8320#9013#0" expanded="false" />
-            <element signature="e#13071#13133#0" expanded="false" />
-            <element signature="e#13224#13285#0" expanded="false" />
-            <element signature="e#13344#13406#0" expanded="false" />
-            <element signature="e#16076#16457#0" expanded="false" />
-            <element signature="e#16493#16653#0" expanded="false" />
-            <element signature="e#16696#16726#0" expanded="false" />
+            <element signature="e#13061#13123#0" expanded="false" />
+            <element signature="e#13214#13275#0" expanded="false" />
+            <element signature="e#13334#13396#0" expanded="false" />
+            <element signature="e#16102#16483#0" expanded="false" />
+            <element signature="e#16519#16679#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/loraDirMulBS.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="203" column="18" lean-forward="false" selection-start-line="203" selection-start-column="18" selection-end-line="203" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/loraDir_default_set.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="348" column="7" lean-forward="false" selection-start-line="346" selection-start-column="0" selection-end-line="357" selection-end-column="18" />
+          <folding>
+            <element signature="e#3349#5157#0" expanded="false" />
+            <element signature="e#5384#5832#0" expanded="false" />
+            <element signature="e#5915#6146#0" expanded="false" />
+            <element signature="e#6181#7265#0" expanded="false" />
+            <element signature="e#7301#8194#0" expanded="false" />
+            <element signature="e#8320#9013#0" expanded="false" />
+            <element signature="e#10755#10956#0" expanded="false" />
+            <element signature="e#18699#20646#0" expanded="false" />
+            <element signature="e#20797#22489#0" expanded="false" />
+            <element signature="e#24779#25161#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="71" column="15" lean-forward="false" selection-start-line="71" selection-start-column="15" selection-end-line="71" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
