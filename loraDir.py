@@ -238,16 +238,23 @@ def airtime(sf, cr, pl, bw):
     return Tpream + Tpayload
 
 
-# this is very complex prodecure for placing nodes
-# and ensure minimum distance between each pair of nodes
-def w_deploym_tofile(numNodes,nodes):
-    fname = "data/" + "nodes" + str(numNodes) + ".txt"
-    # if the file has been created,then return
-    if os.path.isfile(fname):
-        return
-    while numNodes != 0:
+#
+# this function creates a node
+#
+class myNode():
+    def __init__(self, nodeid, bs, period,packetlen):
+        self.nodeid = nodeid
+        self.period = period
+        self.bs = bs
+        self.x = 0
+        self.y = 0
+        self.sf=0
+
+        # this is very complex prodecure for placing nodes
+        # and ensure minimum distance between each pair of nodes
         found = 0
         rounds = 0
+        global nodes
         while (found == 0 and rounds < 100):
             a = random.random()
             b = random.random()
@@ -260,8 +267,8 @@ def w_deploym_tofile(numNodes,nodes):
                     dist = np.sqrt(((abs(n.x - posx)) ** 2) + ((abs(n.y - posy)) ** 2))
                     if dist >= 10:
                         found = 1
-                        x = posx
-                        y = posy
+                        self.x = posx
+                        self.y = posy
                     else:
                         rounds = rounds + 1
                         if rounds == 100:
@@ -269,113 +276,46 @@ def w_deploym_tofile(numNodes,nodes):
                             exit(-1)
             else:
                 print("first node")
-                x = posx
-                y = posy
+                self.x = posx
+                self.y = posy
                 found = 1
-        res = str(x) + " " + str(y) + "\n"
-        with open(fname, 'a') as myfile:
-            myfile.write(res)
-        numNodes -= 1
-    myfile.close()
 
-# this function creates a node
+        self.dist = np.sqrt((self.x - bsx) * (self.x - bsx) + (self.y - bsy) * (self.y - bsy))
+        print('node %d' % nodeid, "x", self.x, "y", self.y, "dist: ", self.dist)
+        self.packet = myPacket(self.nodeid, self.dist,packetlen)
+        self.packet.other_settings(packetlen)
+        self.sent = 0
+
+        # graphics for node
+        global graphics
+        if (graphics == 1):
+            node_marker=''
+            node_color=''
+            if self.packet.sf==7:
+                node_marker='o'
+                node_color ='blue'
+            if self.packet.sf==8:
+                node_marker='v'
+                node_color = 'yellow'
+            if self.packet.sf==9:
+                node_marker='^'
+                node_color = 'pink'
+            if self.packet.sf==10:
+                node_marker='<'
+                node_color = 'orange'
+            if self.packet.sf==11:
+                node_marker='>'
+                node_color = 'purple'
+            if self.packet.sf==12:
+                node_marker='8'
+                node_color = 'brown'
+            scale = 200.0
+            plt.scatter(self.x, self.y, alpha=0.6,s=scale,label='SF='+str(self.packet.sf),color=node_color, edgecolors='none')
 #
-class myNode():
-    def __str__(self):
-        return "["+str(self.nodeid)+","+str(self.y)+"]"
-    def __init__(self, nodeid, bs, period,packetlen):
-        self.nodeid = nodeid
-        self.period = period
-        self.bs = bs
-        self.x = 0
-        self.y = 0#
 # this function creates a packet (associated with a node)
 # it also sets all parameters, currently random
 #
 
-
-
-def nodes_setting(nodes,packetlen):
-    for node in nodes:
-        node.dist = np.sqrt((node.x - bsx) * (node.x - bsx) + (node.y - bsy) * (node.y - bsy))
-        node.packet = myPacket(node.nodeid, node.dist, packetlen)
-        node.sent = 0
-
-
-def color_nodes(nodes):
-    # graphics for node
-    nodes_7x = []
-    nodes_7y = []
-    nodes_8x = []
-    nodes_8y = []
-    nodes_9x = []
-    nodes_9y = []
-    nodes_10x = []
-    nodes_10y = []
-    nodes_11x = []
-    nodes_11y = []
-    nodes_12x = []
-    nodes_12y = []
-    nodes_color = ['blue', 'yellow', 'pink', 'orange', 'purple', 'brown']
-    fig, ax = plt.subplots()
-    ax.scatter(bsx, bsy, c='r', alpha=0.7, s=512, marker='>', edgecolors='none')
-    for node in nodes:
-        if node.packet.sf == 7:
-            if node.x not in nodes_7x:
-                nodes_7x.append(node.x)
-                nodes_7y.append(node.y)
-        if node.packet.sf == 8:
-            nodes_8x.append(node.x)
-            nodes_8y.append(node.y)
-        if node.packet.sf == 9:
-            nodes_9x.append(node.x)
-            nodes_9y.append(node.y)
-        if node.packet.sf == 10:
-            nodes_10x.append(node.x)
-            nodes_10y.append(node.y)
-        if node.packet.sf == 11:
-            nodes_11x.append(node.x)
-            nodes_11y.append(node.y)
-        if node.packet.sf == 12:
-            nodes_12x.append(node.x)
-            nodes_12y.append(node.y)
-    scale = 50.0
-    plt.scatter(nodes_7x, nodes_7y, alpha=0.6, s=scale, label='SF=7', color=nodes_color[0],
-                edgecolors='none')
-    ax.scatter(nodes_8x, nodes_8y, alpha=0.6, s=scale, label='SF=8', color=nodes_color[1],
-               edgecolors='none')
-    ax.scatter(nodes_9x, nodes_9y, alpha=0.6, s=scale, label='SF=9', color=nodes_color[2],
-               edgecolors='none')
-    ax.scatter(nodes_10x, nodes_10y, alpha=0.6, s=scale, label='SF=10', color=nodes_color[3],
-               edgecolors='none')
-    ax.scatter(nodes_11x, nodes_11y, alpha=0.6, s=scale, label='SF=11', color=nodes_color[4],
-               edgecolors='none')
-    ax.scatter(nodes_12x, nodes_12y, alpha=0.6, s=scale, label='SF=12', color=nodes_color[5],
-               edgecolors='none')
-    ax.legend()
-    ax.grid(True)
-    plt.title('Deployment')  # 显示图表标题
-    plt.xlabel('Distance(m)')  # x轴名称
-    plt.ylabel('Distance(m)')  # y轴名称
-    plt.savefig('imag/' + str(nrNodes) + 'nodes_' + 'experiment' + str(experiment) + '.svg')
-    #plt.show()
-
-
-def nodes_deploy(nodes):
-    fname = "data/" + "nodes" + str(len(nodes)) + ".txt"
-    if os.path.isfile(fname) != True:
-        print("deployment file doesn't exist!")
-        exit(-1)
-    with open(fname, 'r') as myfile:
-        i = 0
-        for deploy_xy in myfile:
-            if (i >= len(nodes)):
-                break
-            x, y = deploy_xy.split()
-            nodes[i].x = (float)(x)
-            nodes[i].y = (float)(y)
-            i += 1
-    myfile.close()
 
 class myPacket():
     global experiment
@@ -405,11 +345,9 @@ class myPacket():
         self.bw = 125
         #self.freq = 860000000 + random.randint(0, 2622950)
         self.freq = 852.5+7.8125*random.randint(0,16)
-        #self.freq = 852.5
         # for experiment 3 find the best setting
         # OBS, some hardcoded values
-        self.collided = 0
-        self.processed = 0
+
         # log-shadow
         Lpl = Lpld0 + 10 * gamma * math.log(distance / d0)
         print("Lpl:", Lpl)
@@ -419,7 +357,6 @@ class myPacket():
             self.sf = 12
             self.cr = 4
             self.bw = 125
-            self.freq=915
 
         # for certain experiments override these
         if experiment == 2:
@@ -431,7 +368,7 @@ class myPacket():
             self.sf = 12
             self.cr = 1
             self.bw = 125
-        if (experiment == 3) or (experiment == 5) or (experiment == 6) or experiment ==8 or experiment==7:
+        if (experiment == 3) or (experiment == 5) or (experiment == 6) or experiment ==8:
             minairtime = 9999
             minsf = 0
             minbw = 0
@@ -456,8 +393,7 @@ class myPacket():
                             minsensi = sensi[i, j]
             if (minairtime == 9999):
                 print("does not reach base station")
-                self.rssi=-11111
-                return
+                exit(-1)
             print("best sf:", minsf, " best bw: ", minbw, "best airtime:", minairtime)
             self.rectime = minairtime
             self.sf = minsf
@@ -491,6 +427,8 @@ class myPacket():
             # choose some random frequences
             self.freq = random.choice([860000000, 864000000, 868000000])
 
+        self.collided = 0
+        self.processed = 0
 
 
     # this function resets sfs according to the distance, but the bw stays still.
@@ -521,10 +459,10 @@ class myPacket():
         self.arriveTime = 0
 
 
-        # print("frequency", self.freq, "symTime ", self.symTime)
-        # print("bw", self.bw, "sf", self.sf, "cr", self.cr, "rssi", self.rssi)
+        print("frequency", self.freq, "symTime ", self.symTime)
+        print("bw", self.bw, "sf", self.sf, "cr", self.cr, "rssi", self.rssi)
         self.rectime = airtime(self.sf, self.cr, self.pl, self.bw)
-        print("rectime: ", self.rectime, " nodeid: ",self.nodeid )
+        print("rectime node ", self.nodeid, "  ", self.rectime)
         # denote if packet is collided
 
 def scheduleSF(nodes):
@@ -589,13 +527,13 @@ def scheduleSF(nodes):
 def transmit(env, node):
     while True:
         yield env.timeout(random.expovariate(1.0 / float(node.period)))
+
         # time sending and receiving
         # packet arrives -> add to base station
+
         node.sent = node.sent + 1
         if (node in packetsAtBS):
-            print(len(packetsAtBS))
-            #print(str(node.nodeid))
-            #print("ERROR: packet already in")
+            print("ERROR: packet already in")
         else:
             sensitivity = sensi[node.packet.sf - 7, [125, 250, 500].index(node.packet.bw) + 1]
             if node.packet.rssi < sensitivity:
@@ -610,7 +548,9 @@ def transmit(env, node):
                     node.packet.collided = 0
                 packetsAtBS.append(node)
                 node.packet.addTime = env.now
+
         yield env.timeout(node.packet.rectime)
+
         if node.packet.lost:
             global nrLost
             nrLost += 1
@@ -686,24 +626,15 @@ GL = 0
 
 if __name__ == "__main__":
 
-    # get arguments
-    if len(sys.argv) >= 5:
-        nrNodes = int(sys.argv[1])
-        avgSendTime = int(sys.argv[2])
-        experiment = int(sys.argv[3])
-        simtime = int(sys.argv[4])
-        if len(sys.argv) > 5:
-            full_collision = bool(int(sys.argv[5]))
-        requirement=sys.argv[6]
-        print("Nodes:", nrNodes)
-        print("AvgSendTime (exp. distributed):", avgSendTime)
-        print("Experiment: ", experiment)
-        print("Simtime: ", simtime)
-        print("Full Collision: ", full_collision)
-    else:
-        print("usage: ./loraDir nrNodes avgSendTime experimentNr simtime [full_collision]")
-        print("experiment 0 and 1 use 1 frequency only")
-        exit(-1)
+    nrNodes = 3
+    avgSendTime = 5
+    experiment = 1
+    simtime = 10
+    print("Nodes:", nrNodes)
+    print("AvgSendTime (exp. distributed):", avgSendTime)
+    print("Experiment: ", experiment)
+    print("Simtime: ", simtime)
+    print("Full Collision: ", full_collision)
 
     sensi = np.array([sf7, sf8, sf9, sf10, sf11, sf12])
     if experiment in [0, 1, 4,7]:
@@ -724,9 +655,9 @@ if __name__ == "__main__":
     ymax = bsy + maxDist + 20
 
     # prepare graphics and add sink
-    # if (graphics == 1):
-        # color = ['r']
-        # ax.scatter(bsx, bsy, c=color, alpha=0.7, s=512,marker='>',edgecolors='none')
+    if (graphics == 1):
+        color = ['r']
+        plt.scatter(bsx, bsy, c=color, alpha=0.7, s=512,marker='>',edgecolors='none')
         # plt.ion()
         # plt.figure()
         # ax = plt.gcf().gca()
@@ -734,29 +665,34 @@ if __name__ == "__main__":
         # ax.add_artist(plt.Circle((bsx, bsy), 3, fill=True, color='green'))
         # ax.add_artist(plt.Circle((bsx, bsy), maxDist, fill=False, color='green'))
 
-
     for i in range(0, nrNodes):
         # myNode takes period (in ms), base station id packetlen (in Bytes)
         # 1000000 = 16 min
         node = myNode(i, bsId, avgSendTime, 20)
         nodes.append(node)
-    # generate the file to deploy nodes
-    w_deploym_tofile(nrNodes,nodes)
-    # use the file to deploy
-    nodes_deploy(nodes)
-    # set nodes parameters
-    nodes_setting(nodes,20)
+    for i in range(0,nrNodes):
+         print("SF: " + str(nodes[i].packet.sf))
     if experiment ==8:
         scheduleSF(nodes)
-    for i in range(0,nrNodes):
-         nodes[i].packet.other_settings(20)
-    color_nodes(nodes)
     for i in range(0, nrNodes):
-        env.process(transmit(env, nodes[i]))
+        env.process(transmit(env, i))
+
+    # prepare show
+    if (graphics == 1):
+        # plt.xlim([0, xmax])
+        # plt.ylim([0, ymax])
+        # plt.draw()
+        # plt.show()
+        plt.title('Deployment')  # 显示图表标题
+        plt.xlabel('Distance(m)')  # x轴名称
+        plt.ylabel('Distance(m)')  # y轴名称
+        plt.legend()
+        plt.grid(True)  # 显示网格线
+        plt.savefig('imag/'+str(nrNodes)+'nodes_'+'experiment'+str(experiment)+'.svg')
+        #plt.show()
 
 
     # start simulation
-
     env.run(until=simtime)
 
     # print stats and save into file
@@ -786,21 +722,20 @@ if __name__ == "__main__":
     der = (nrReceived) / float(sent)
     print("DER method 2:", der)
 
-    print("maxDist:", maxDist)
     # this can be done to keep graphics visible
     # if (graphics == 1):
     #     sys.stdin.read()
 
     # save experiment data into a dat file that can be read by e.g. gnuplot
     # name of file would be:  exp0.dat for experiment 0
-    fname = "data/"+"exp" + requirement+ ".dat"
+    fname = "data/"+"exp" + str(nrNodes) + ".dat"
     print(fname)
     if os.path.isfile(fname):
         res = "\n" + str(nrNodes) + " " + str(nrCollisions) + " " + str(sent) + " " + str(energy)+ " " + str(experiment)+ " " + str(avgSendTime)
     else:
-        res = "#nrNodes nrCollisions nrTransmissions OverallEnergy  DER ExperimentNumer SendDuration\n" + \
-              str(nrNodes) + "      " + str(nrCollisions) + "      " + str(sent) + "      " + str(energy)+ \
-              "      "+str(der)+"      " + str(experiment)+"      "+str(avgSendTime)
+        res = "#nrNodes nrCollisions nrTransmissions OverallEnergy  ExperimentNumer SendDuration\n" + \
+              str(nrNodes) + " " + str(
+            nrCollisions) + " " + str(sent) + " " + str(energy)+ " " + str(experiment)+" "+str(avgSendTime)
     with open(fname, 'a') as myfile:
         myfile.write(res)
     myfile.close()
