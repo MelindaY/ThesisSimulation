@@ -185,11 +185,17 @@ def nodes_deploy(nodes):
 
 
 if __name__ == "__main__":
-    nodes=[]
-    for node in range(0,100):
-        node=myNode()
-        nodes.append(node)
-    w_deploym_tofile(100,nodes)
-
-    nodes_deploy(nodes)
-    color_nodes(nodes)
+    k = 0
+    po = []
+    while k<100:
+        maxDist = 118.502866057
+        bsx = maxDist+10
+        bsy = maxDist + 10
+        a = random.random()
+        b = random.random()
+        posx = math.cos(2 * math.pi * a) * maxDist + bsx*5
+        po.append(posx)
+        posy = math.cos(2 * math.pi * b) * maxDist + bsy*5
+        print(posx,posy)
+        k += 1
+    print(np.array(po).mean())

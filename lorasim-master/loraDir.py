@@ -98,19 +98,19 @@ def checkcollision(packet):
         if packetsAtBS[i].packet.processed == 1:
             processing = processing + 1
     if (processing > maxBSReceives):
-        print("too long: {}".format(len(packetsAtBS)))
+        # print("too long: {}".format(len(packetsAtBS)))
         packet.processed = 0
     else:
         packet.processed = 1
 
     if packetsAtBS:
-        print("CHECK node {} (sf:{} bw:{} freq:{:.6e}) others: {}".format(
-            packet.nodeid, packet.sf, packet.bw, packet.freq,
-            len(packetsAtBS)))
+        # print("CHECK node {} (sf:{} bw:{} freq:{:.6e}) others: {}".format(
+        #     packet.nodeid, packet.sf, packet.bw, packet.freq,
+        #     len(packetsAtBS)))
         for other in packetsAtBS:
             if other.nodeid != packet.nodeid:
-                print(">> node {} (sf:{} bw:{} freq:{:.6e})".format(
-                    other.nodeid, other.packet.sf, other.packet.bw, other.packet.freq))
+                # print(">> node {} (sf:{} bw:{} freq:{:.6e})".format(
+                #     other.nodeid, other.packet.sf, other.packet.bw, other.packet.freq))
                 # simple collision
                 if frequencyCollision(packet, other.packet) \
                         and sfCollision(packet, other.packet):
@@ -141,14 +141,14 @@ def checkcollision(packet):
 #        |f1-f2| <= 30 kHz if f1 or f2 has bw 125
 def frequencyCollision(p1, p2):
     if (abs(p1.freq - p2.freq) <= 120 and (p1.bw == 500 or p2.freq == 500)):
-        print("frequency coll 500")
+        # print("frequency coll 500")
         return True
     elif (abs(p1.freq - p2.freq) <= 60 and (p1.bw == 250 or p2.freq == 250)):
-        print("frequency coll 250")
+       # print("frequency coll 250")
         return True
     else:
         if (abs(p1.freq - p2.freq) <= 30):
-            print("frequency coll 125")
+            # print("frequency coll 125")
             return True
             # else:
     #print("no frequency coll")
@@ -162,29 +162,29 @@ def frequencyCollision(p1, p2):
 #
 def sfCollision(p1, p2):
     if p1.sf == p2.sf:
-        print("collision sf node {} and node {}".format(p1.nodeid, p2.nodeid))
+        #print("collision sf node {} and node {}".format(p1.nodeid, p2.nodeid))
         # p2 may have been lost too, will be marked by other checks
         return True
-    print("no sf collision")
+    #print("no sf collision")
     return False
 
 
 def powerCollision(p1, p2):
     powerThreshold = 6  # dB
-    print("pwr: node {0.nodeid} {0.rssi:3.2f} dBm node {1.nodeid} {1.rssi:3.2f} dBm; diff {2:3.2f} dBm".format(p1, p2,
-                                                                                                               round(
-                                                                                                                   p1.rssi - p2.rssi,
-                                                                                                                   2)))
+    # print("pwr: node {0.nodeid} {0.rssi:3.2f} dBm node {1.nodeid} {1.rssi:3.2f} dBm; diff {2:3.2f} dBm".format(p1, p2,
+    #                                                                                                            round(
+    #                                                                                                                p1.rssi - p2.rssi,
+    #                                                                                                                2)))
     if abs(p1.rssi - p2.rssi) < powerThreshold:
-        print("collision pwr both node {} and node {}".format(p1.nodeid, p2.nodeid))
+        # print("collision pwr both node {} and node {}".format(p1.nodeid, p2.nodeid))
         # packets are too close to each other, both collide
         # return both packets as casualties
         return (p1, p2)
     elif p1.rssi - p2.rssi < powerThreshold:
         # p2 overpowered p1, return p1 as casualty
-        print("collision pwr node {} overpowered node {}".format(p2.nodeid, p1.nodeid))
+        # print("collision pwr node {} overpowered node {}".format(p2.nodeid, p1.nodeid))
         return (p1,)
-    print("p1 wins, p2 lost")
+    # print("p1 wins, p2 lost")
     # p2 was the weaker packet, return it as a casualty
     return (p2,)
 
@@ -203,15 +203,15 @@ def timingCollision(p1, p2):
     # check whether p2 ends in p1's critical section
     p2_end = p2.addTime + p2.rectime
     p1_cs = env.now + Tpreamb
-    print("collision timing node {} ({},{},{}) node {} ({},{})".format(
-        p1.nodeid, env.now - env.now, p1_cs - env.now, p1.rectime,
-        p2.nodeid, p2.addTime - env.now, p2_end - env.now
-    ))
+    # print("collision timing node {} ({},{},{}) node {} ({},{})".format(
+    #     p1.nodeid, env.now - env.now, p1_cs - env.now, p1.rectime,
+    #     p2.nodeid, p2.addTime - env.now, p2_end - env.now
+    # ))
     if p1_cs < p2_end:
         # p1 collided with p2 and lost
-        print("not late enough")
+        # print("not late enough")
         return True
-    print("saved by the preamble")
+    # print("saved by the preamble")
     return False
 
 
@@ -232,7 +232,7 @@ def airtime(sf, cr, pl, bw):
 
     Tsym = (2.0 ** sf) / bw
     Tpream = (Npream + 4.25) * Tsym
-    print("sf", sf, " cr", cr, "pl", pl, "bw", bw)
+    #print("sf", sf, " cr", cr, "pl", pl, "bw", bw)
     payloadSymbNB = 8 + max(math.ceil((8.0 * pl - 4.0 * sf + 28 + 16 - 20 * H) / (4.0 * (sf - 2 * DE))) * (cr + 4), 0)
     Tpayload = payloadSymbNB * Tsym
     return Tpream + Tpayload
@@ -253,8 +253,8 @@ def w_deploym_tofile(numNodes,nodes):
             b = random.random()
             if b < a:
                 a, b = b, a
-            posx = b * maxDist * math.cos(2 * math.pi * a / b) + bsx
-            posy = b * maxDist * math.sin(2 * math.pi * a / b) + bsy
+            posx = (b * maxDist * math.cos(2 * math.pi * a / b) + bsx)
+            posy = (b * maxDist * math.sin(2 * math.pi * a / b) + bsy)
             if len(nodes) > 0:
                 for index, n in enumerate(nodes):
                     dist = np.sqrt(((abs(n.x - posx)) ** 2) + ((abs(n.y - posy)) ** 2))
@@ -278,11 +278,34 @@ def w_deploym_tofile(numNodes,nodes):
         numNodes -= 1
     myfile.close()
 
+
+# this is very complex prodecure for placing nodes
+# and ensure minimum distance between each pair of nodes
+def my_deploy(numNodes,nodes):
+    fname = "data/" + "nodes" + str(numNodes) + ".txt"
+    # if the file has been created,then return
+    if os.path.isfile(fname):
+        return
+    index = []
+    while numNodes != 0:
+        a = random.random()
+        b = random.random()
+        posx = math.cos(2 * math.pi * a) * maxDist*2 + maxDist*2
+        posy = math.cos(2 * math.pi * b) * maxDist*2 + maxDist*5*2
+        res = str(posx) + " " + str(posy) + "\n"
+        with open(fname, 'a') as myfile:
+            myfile.write(res)
+        numNodes -= 1
+    myfile.close()
+
 # this function creates a node
 #
 class myNode():
     def __str__(self):
-        return "["+str(self.nodeid)+","+str(self.y)+"]"
+        return "["+str(self.nodeid)+"]"
+
+    def __lt__(self, other):
+        return self.packet.Prx > other.packet.Prx
     def __init__(self, nodeid, bs, period,packetlen):
         self.nodeid = nodeid
         self.period = period
@@ -292,7 +315,6 @@ class myNode():
 # this function creates a packet (associated with a node)
 # it also sets all parameters, currently random
 #
-
 
 
 def nodes_setting(nodes,packetlen):
@@ -357,7 +379,8 @@ def color_nodes(nodes):
     plt.title('Deployment')  # 显示图表标题
     plt.xlabel('Distance(m)')  # x轴名称
     plt.ylabel('Distance(m)')  # y轴名称
-    plt.savefig('imag/' + str(nrNodes) + 'nodes_' + 'experiment' + str(experiment) + '.svg')
+    plt.axis('tight')
+    plt.savefig('imag/' + str(nrNodes) + 'nodes_' + 'experiment' + str(experiment) + '.png')
     #plt.show()
 
 
@@ -377,6 +400,7 @@ def nodes_deploy(nodes):
             i += 1
     myfile.close()
 
+
 class myPacket():
     global experiment
     global Ptx
@@ -393,7 +417,7 @@ class myPacket():
                  7:   random choose (random_set)
                  8:   use gateways to set,balance air_time and other issues
     '''
-    def __init__(self, nodeid, distance,plen):
+    def __init__(self, nodeid, distance, plen):
 
         self.nodeid = nodeid
         self.txpow = Ptx
@@ -412,18 +436,19 @@ class myPacket():
         self.processed = 0
         # log-shadow
         Lpl = Lpld0 + 10 * gamma * math.log(distance / d0)
-        print("Lpl:", Lpl)
-        Prx = self.txpow - GL - Lpl
+        # print("Distance:", distance)
+        # print("Lpl:", Lpl)
+        self.Prx = self.txpow - GL - Lpl
         # for certain experiments override these
         if experiment == 1 or experiment == 0:
-            self.sf = 12
+            self.sf = 8
             self.cr = 4
             self.bw = 125
             self.freq=915
 
         # for certain experiments override these
         if experiment == 2:
-            self.sf = 6
+            self.sf = 7
             self.cr = 1
             self.bw = 500
         # lorawan
@@ -431,16 +456,16 @@ class myPacket():
             self.sf = 12
             self.cr = 1
             self.bw = 125
-        if (experiment == 3) or (experiment == 5) or (experiment == 6) or experiment ==8 or experiment==7:
+        if (experiment == 3) or (experiment == 5):
             minairtime = 9999
             minsf = 0
             minbw = 0
 
-            print("Prx:", Prx)
+            # print("Prx:", Prx)
 
             for i in range(0, 6):
                 for j in range(1, 4):
-                    if (sensi[i, j] < Prx):
+                    if (sensi[i, j] < self.Prx):
                         self.sf = int(sensi[i, 0])
                         if j == 1:
                             self.bw = 125
@@ -466,22 +491,21 @@ class myPacket():
 
             if experiment == 5:
                 # reduce the txpower if there's room left
-                self.txpow = max(2, self.txpow - math.floor(Prx - minsensi))
-                Prx = self.txpow - GL - Lpl
+                self.txpow = max(2, self.txpow - math.floor(self.Prx - minsensi))
+                self.Prx = self.txpow - GL - Lpl
                 print('minsesi {} best txpow {}'.format(minsensi, self.txpow))
-        if experiment == 6 or experiment ==8:
-            sensitivity = sensi[self.sf - 7, [125, 250, 500].index(self.bw) + 1]
-            bw_index = [125, 250, 500].index(self.bw) + 1
-            # former_rssi = self.rssi
-            self.txpow = max(2, self.txpow - math.floor(Prx - minsensi))
-            Prx = self.txpow - GL - Lpl
-            for i in range(5, -1):
-                if sensitivity < Prx:
-                    self.sf = i + 7
-            if Prx < sensitivity:
-                self.sf = 12
+        if experiment == 6:
+            i = 5
+            while i != -1:
+                for j in range(1, 4):
+                    sensi_node = sensi[i, j]
+                    if self.Prx > sensi_node:
+                        self.sf = i + 7
+                        self.bw = 125 * pow(2,j-1)
+                i-=1
+            # if Prx < sensitivity:
+            #     self.sf = 12
             self.cr = 1
-            self.bw = 125
         if experiment == 7:
             # randomize configuration values
             self.sf = random.randint(6, 12)
@@ -490,7 +514,6 @@ class myPacket():
             # for certain experiments override these and
             # choose some random frequences
             self.freq = random.choice([860000000, 864000000, 868000000])
-
 
 
     # this function resets sfs according to the distance, but the bw stays still.
@@ -519,13 +542,96 @@ class myPacket():
         self.pl = plen
         self.symTime = (2.0 ** self.sf) / self.bw
         self.arriveTime = 0
-
-
         # print("frequency", self.freq, "symTime ", self.symTime)
         # print("bw", self.bw, "sf", self.sf, "cr", self.cr, "rssi", self.rssi)
         self.rectime = airtime(self.sf, self.cr, self.pl, self.bw)
-        print("rectime: ", self.rectime, " nodeid: ",self.nodeid )
+        #print("rectime: ", self.rectime, " nodeid: ",self.nodeid )
         # denote if packet is collided
+
+
+
+def total_fair_sf(nodes):
+    ratio = np.array([0.44979919678714858, 0.25702811244979917, 0.14457831325301204, 0.080321285140562249,
+                      0.044176706827309238, 0.024096385542168676])
+    for i in range(0,len(ratio)):
+        ratio[i] = ratio[i]*len(nodes)
+    nodes.sort()
+    k = 0
+    for i in range(0,len(ratio)):
+        if i > 0:
+            k += int(ratio[i-1])
+        for j in range(0, int(ratio[i])):
+            if j+k < len(nodes):
+                nodes[j+k].packet.sf = i+7
+
+
+def is_fair_network(nodes):
+    flag = True
+    ratio = []
+    part_ratio = []
+    node_sf7 = []
+    node_sf8 = []
+    node_sf9 = []
+    node_sf10 = []
+    node_sf11 = []
+    node_sf12 = []
+    ## 2-deminsional array to store the nodes with same sf
+    sf_number = []
+    sf_number.append(node_sf7)
+    sf_number.append(node_sf8)
+    sf_number.append(node_sf9)
+    sf_number.append(node_sf10)
+    sf_number.append(node_sf11)
+    sf_number.append(node_sf12)
+    for node in nodes:
+        sf_number[node.packet.sf - 7].append(node)
+    sf_number /= len(nodes)
+    d = []
+    for i in range(0, 7):
+        d.append(sf_number[i]-ratio[i])
+    i = 6
+    sum_d = 0
+    while i != 0:
+        sum_d += d[i]
+        if sum_d > 0:
+            flag = False
+        i -= 1
+    flag = True
+    if flag:
+        total_fair_sf(nodes)
+    else:
+        Cb = []
+        for i in range(0, 7):
+            if d[i] > 0:
+                Cb.append(i)
+        # 分组
+        k =0
+        group = []
+        alter = []
+        for i in range(0,7):
+            alter.append(i)
+            if i == Cb[k]:
+                group.append(np.array(alter))
+                alter.clear()
+                k += 1
+        if len(alter) != 0:
+            group.append(np.array(alter))
+        for i in range(0, len(group)):
+            if len(group[i]) > 1:
+                total_sf = 0
+                total_sf_fair = 0
+                for j in range(0,len(group[i])):
+                    total_sf += 7+group[i][j]/2**(7+group[i][j])
+                    total_sf_fair += sf_number[group[i][j]]
+                for j in range(1, len(group[i])):
+                    current_ratio = (7 + group[i][j] / 2 ** (7 + group[i][j])) / total_sf
+                    d[j] = abs(current_ratio * total_sf_fair - ratio[group[i][0]])
+                    surplus = d[j]*len(nodes)
+                    for k in range(0,surplus):
+                        tmp_node = sf_number[group[i][0]].pop()
+                        tmp_node.packet.sf = group[i][j]
+                        sf_number[group[i][j]].append(tmp_node)
+
 
 def scheduleSF(nodes):
     timeonair_index = [65.536, 118.784, 217.088, 401.408, 753.664, 1409.024]
@@ -546,31 +652,36 @@ def scheduleSF(nodes):
 
     for node in nodes:
         sf_number[node.packet.sf - 7].append(node)
+    print("Before assignment: ")
+    for i in range(0,6):
+        print(len(sf_number[i]))
     congestion_index = [0,0,0,0,0,0]
     for i in range(0, 6):
         congestion_index[i] = len(sf_number[i]) * timeonair_index[i]
     left = 0
-    right = 6
-    nsf = [0, 0, 0, 0, 0, 0]  # number of packets each SF should have
+    right = 5
+    nsf = [0, 0, 0, 0, 0, 0]  # number of packets each SF should have orignal value: sf numbers
+    for i in range(0,6):
+        nsf[i] = len(sf_number[i])
     # average the number of different SFs
-    while left != right:
-        print("left:",left,"right: ",right)
+    print("congestion_index: ", congestion_index)
+    while left < right:
         max_value = congestion_index[left]
         max_index = left
-        for i in range(left, right):
+        for i in range(left, right+1):
             if congestion_index[i] > max_value:
                 max_value = congestion_index[i]
                 max_index = i
-        if max_index == right:
-            right -= 1
+                break
+        if (max_index == right & right-left == 1)| max_index == left:
+            left += 1
         else:
             avg_congestion = 0
-            for j in range(max_index, right):
+            for j in range(left,max_index):
                 avg_congestion += congestion_index[j]
-            print("max_index:",max_index,"right:",right)
-            avg_congestion /= (right - max_index + 1)
-            for j in range(max_index, right):
-                nsf[j] = (int)(avg_congestion / timeonair_index[j])
+            avg_congestion /= (max_index-left)
+            for j in range(left,max_index):
+                nsf[j] = math.ceil(avg_congestion / timeonair_index[j])
                 remove_number = len(sf_number[j]) \
                                 - nsf[j]
                 if remove_number > 2:
@@ -579,8 +690,8 @@ def scheduleSF(nodes):
                             tmp_node = sf_number[j].pop()
                             tmp_node.packet.sf += 1
                             sf_number[j + 1].append(tmp_node)
-            left = max_index + 1
-
+            left = max_index
+    print("NSF: ",nsf)
 
 # main discrete event loop, runs for each node
 # a global list of packet being processed at the gateway
@@ -616,6 +727,8 @@ def transmit(env, node):
             nrLost += 1
         if node.packet.collided == 1:
             global nrCollisions
+            global d_sfCollisions
+            d_sfCollisions[node.packet.sf-7] +=1
             nrCollisions = nrCollisions + 1
         if node.packet.collided == 0 and not node.packet.lost:
             global nrReceived
@@ -665,6 +778,8 @@ global d0
 global var
 global Lpld0
 global GL
+global d_sfCollisions
+global minsensi
 # max distance: 300m in city, 3000 m outside (5 km Utz experiment)
 # also more unit-disc like according to Utz
 bsId = 1
@@ -686,6 +801,9 @@ GL = 0
 
 if __name__ == "__main__":
 
+    d_sfCollisions = np.array([0, 0, 0, 0, 0, 0])
+    nrSfNum = np.array([0, 0, 0, 0, 0, 0])
+    nrSfReceived = np.array([0, 0, 0, 0, 0, 0])
     # get arguments
     if len(sys.argv) >= 5:
         nrNodes = int(sys.argv[1])
@@ -706,7 +824,7 @@ if __name__ == "__main__":
         exit(-1)
 
     sensi = np.array([sf7, sf8, sf9, sf10, sf11, sf12])
-    if experiment in [0, 1, 4,7]:
+    if experiment in [0, 1, 4, 7]:
         minsensi = sensi[5, 2]  # 5th row is SF12, 2nd column is BW125
     elif experiment == 2:
         minsensi = -112.0  # no experiments, so value from datasheet
@@ -718,8 +836,8 @@ if __name__ == "__main__":
     print("maxDist:", maxDist)
 
     # base station placement
-    bsx = maxDist + 10
-    bsy = maxDist + 10
+    bsx = maxDist*2
+    bsy = maxDist*2
     xmax = bsx + maxDist + 20
     ymax = bsy + maxDist + 20
 
@@ -738,16 +856,17 @@ if __name__ == "__main__":
     for i in range(0, nrNodes):
         # myNode takes period (in ms), base station id packetlen (in Bytes)
         # 1000000 = 16 min
-        node = myNode(i, bsId, avgSendTime, 20)
+        node = myNode(i, bsId, avgSendTime, 10)
         nodes.append(node)
     # generate the file to deploy nodes
-    w_deploym_tofile(nrNodes,nodes)
+    my_deploy(nrNodes,nodes)
+    #w_deploym_tofile(nrNodes, nodes)
     # use the file to deploy
     nodes_deploy(nodes)
     # set nodes parameters
     nodes_setting(nodes,20)
     if experiment ==8:
-        scheduleSF(nodes)
+        total_fair_sf(nodes)
     for i in range(0,nrNodes):
          nodes[i].packet.other_settings(20)
     color_nodes(nodes)
@@ -771,8 +890,11 @@ if __name__ == "__main__":
     # mA = 90    # current draw for TX = 17 dBm
     V = 3.0  # voltage XXX
     sent = sum(n.sent for n in nodes)
+    for node in nodes:
+        nrSfNum[node.packet.sf-7] += node.sent
+        if node.packet.collided == 0 and not node.packet.lost:
+            nrSfReceived[node.packet.sf-7] += 1
     energy = sum(node.packet.rectime * TX[int(node.packet.txpow) + 2] * V * node.sent for node in nodes) / 1e6
-
     print("energy (in J): ", energy)
     print("sent packets: ", sent)
     print("collisions: ", nrCollisions)
@@ -790,19 +912,38 @@ if __name__ == "__main__":
     # this can be done to keep graphics visible
     # if (graphics == 1):
     #     sys.stdin.read()
-
+    print("different sf Packets: ", nrSfNum)
+    print("different sf Collisions: ",d_sfCollisions)
+    print("different sf Collisions Ratio: ",d_sfCollisions/nrSfNum)
+    print("different sf Received: ", nrSfReceived)
     # save experiment data into a dat file that can be read by e.g. gnuplot
     # name of file would be:  exp0.dat for experiment 0
     fname = "data/"+"exp" + requirement+ ".dat"
     print(fname)
     if os.path.isfile(fname):
-        res = "\n" + str(nrNodes) + " " + str(nrCollisions) + " " + str(sent) + " " + str(energy)+ " " + str(experiment)+ " " + str(avgSendTime)
+        res = "\n" + str(nrNodes) + "      " + str(nrCollisions/sent) + "      " + str(
+            nrProcessed) + "      " + "      " \
+              + str(nrReceived) + "   " + str(nrReceived * 20 / (simtime / 1000)) + "      " + str(
+            energy) + "      " + str(der) + "      " \
+              + str(experiment) + "      " + str(avgSendTime)
     else:
-        res = "#nrNodes nrCollisions nrTransmissions OverallEnergy  DER ExperimentNumer SendDuration\n" + \
-              str(nrNodes) + "      " + str(nrCollisions) + "      " + str(sent) + "      " + str(energy)+ \
-              "      "+str(der)+"      " + str(experiment)+"      "+str(avgSendTime)
+        res = "#nrNodes nrCollisions Transmission Processed Received Received Throughput OverallEnergy  DER ExperimentNumer SendDuration\n" + \
+              str(nrNodes) + "      " + str(nrCollisions) + "/" + str(sent)+ "      " + str(nrProcessed)+ "      " + "      " \
+              + str(nrReceived)+"   "+str(nrReceived*20/(simtime/1000)) + "      " + str(energy)+ "      "+str(der)+"      " \
+              + str(experiment)+"      "+str(avgSendTime)
     with open(fname, 'a') as myfile:
         myfile.write(res)
+    myfile.close()
+
+    fname = "data/"+"latency_" + str(experiment)+"experiment"+ str(nrNodes)+"nodes" + ".dat"
+    print(fname)
+    for node in nodes:
+        if os.path.isfile(fname):
+            res = "\n" + str(node.packet.rectime)
+        else:
+            res = "#rectime\n" + str(node.packet.rectime)
+        with open(fname, 'a') as myfile:
+            myfile.write(res)
     myfile.close()
 
     # with open('nodes.txt','w') as nfile:

@@ -1,0 +1,16 @@
+python loraDir.py 50 300000 0 7200000 1 sf
+python loraDir.py 100 300000 0 7200000 1 sf
+python loraDir.py 200 300000 0 7200000 1 sf
+python loraDir.py 300 300000 0 7200000 1 sf
+python loraDir.py 400 300000 0 7200000 1 sf
+python loraDir.py 500 300000 0 7200000 1 sf
+python loraDir.py 600 300000 0 7200000 1 sf
+python loraDir.py 700 300000 0 7200000 1 sf
+python loraDir.py 800 300000 0 7200000 1 sf
+python loraDir.py 900 300000 0 7200000 1 sf
+python loraDir.py 1100 300000 0 7200000 1 sf
+python loraDir.py 1300 300000 0 7200000 1 sf
+python loraDir.py 1500 300000 0 7200000 1 sf
+python loraDir.py 1700 300000 0 7200000 1 sf
+python loraDir.py 1800 300000 0 7200000 1 sf
+python loraDir.py 2000 300000 0 7200000 1 sf
