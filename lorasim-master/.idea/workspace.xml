@@ -3,15 +3,25 @@
   <component name="ChangeListManager">
     <list default="true" id="dff3bb0e-a408-40b2-ab81-8b3070a042e2" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/../loraDir.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/imag/500nodes_experiment0.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/nodes30.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/nodes5.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/nodes50.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/nodes70.txt" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../lorasim-master1/lorasim-master/loraDir.py" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../~WRL2214.tmp" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imag/2100nodes_experiment5.png" afterPath="$PROJECT_DIR$/imag/2100nodes_experiment5.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imag/2100nodes_experiment6.png" afterPath="$PROJECT_DIR$/imag/2100nodes_experiment6.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imag/2100nodes_experiment8.png" afterPath="$PROJECT_DIR$/imag/2100nodes_experiment8.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imag/500nodes_experiment8.png" afterPath="$PROJECT_DIR$/imag/500nodes_experiment8.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../~$仿真方案.docx" afterPath="$PROJECT_DIR$/../~$仿真方案.docx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../仿真方案.docx" afterPath="$PROJECT_DIR$/../仿真方案.docx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/nodes500.txt" afterPath="$PROJECT_DIR$/data/nodes500.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/exptest.dat" afterPath="$PROJECT_DIR$/data/exptest.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/latency_5experiment2100nodes.dat" afterPath="$PROJECT_DIR$/data/latency_5experiment2100nodes.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/latency_6experiment2100nodes.dat" afterPath="$PROJECT_DIR$/data/latency_6experiment2100nodes.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/latency_8experiment2100nodes.dat" afterPath="$PROJECT_DIR$/data/latency_8experiment2100nodes.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/latency_8experiment500nodes.dat" afterPath="$PROJECT_DIR$/data/latency_8experiment500nodes.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/nodes2100.txt" afterPath="$PROJECT_DIR$/data/nodes2100.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/loraDir.py" afterPath="$PROJECT_DIR$/loraDir.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.py" afterPath="$PROJECT_DIR$/test.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -32,16 +42,16 @@
       <file leaf-file-name="loraDir.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/loraDir.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="839" column="19" lean-forward="false" selection-start-line="839" selection-start-column="19" selection-end-line="839" selection-end-column="19" />
+            <state relative-caret-position="153">
+              <caret line="292" column="37" lean-forward="true" selection-start-line="292" selection-start-column="37" selection-end-line="292" selection-end-column="37" />
               <folding>
                 <element signature="e#561#2197#1" expanded="false" />
                 <element signature="e#5396#5849#0" expanded="false" />
                 <element signature="e#5932#6165#0" expanded="false" />
                 <element signature="e#8365#9059#0" expanded="false" />
-                <element signature="e#20581#22606#0" expanded="false" />
-                <element signature="e#22636#24779#0" expanded="false" />
-                <element signature="e#24932#26777#0" expanded="false" />
+                <element signature="e#20559#22584#0" expanded="false" />
+                <element signature="e#22614#24757#0" expanded="false" />
+                <element signature="e#24910#26757#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -50,8 +60,8 @@
       <file leaf-file-name="loraDirOriginal.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/loraDirOriginal.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1481">
-              <caret line="328" column="8" lean-forward="false" selection-start-line="328" selection-start-column="8" selection-end-line="328" selection-end-column="35" />
+            <state relative-caret-position="191">
+              <caret line="373" column="8" lean-forward="false" selection-start-line="373" selection-start-column="8" selection-end-line="373" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -154,10 +164,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>mypack</find>
-      <find>node</find>
-      <find>print</find>
-      <find>sort</find>
       <find>maxBSReceives</find>
       <find>total_fair_sf</find>
       <find>freq</find>
@@ -168,22 +174,26 @@
       <find>sf</find>
       <find>lpl</find>
       <find>my_depl</find>
-      <find>myPacket</find>
       <find>node.packet</find>
       <find>myNode</find>
       <find>myPac</find>
       <find>w_de</find>
-      <find>my_de</find>
       <find>Ptx</find>
       <find>packet</find>
       <find>experiment</find>
       <find>experiment ==</find>
-      <find>Prx</find>
-      <find>prx</find>
-      <find>my_deploy</find>
       <find>xmax</find>
       <find>maxDist</find>
       <find>bsx</find>
+      <find>my_deploy</find>
+      <find>prx</find>
+      <find>rssi</find>
+      <find>experiment == 5</find>
+      <find>experiment</find>
+      <find>Prx</find>
+      <find>my_de</find>
+      <find>myPacket</find>
+      <find>100</find>
     </findStrings>
     <replaceStrings>
       <replace>max_index</replace>
@@ -600,9 +610,9 @@
             <element signature="e#5396#5849#0" expanded="false" />
             <element signature="e#5932#6165#0" expanded="false" />
             <element signature="e#8365#9059#0" expanded="false" />
-            <element signature="e#20581#22606#0" expanded="false" />
-            <element signature="e#22636#24779#0" expanded="false" />
-            <element signature="e#24932#26777#0" expanded="false" />
+            <element signature="e#20559#22584#0" expanded="false" />
+            <element signature="e#22614#24757#0" expanded="false" />
+            <element signature="e#24910#26757#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -761,9 +771,9 @@
             <element signature="e#5396#5849#0" expanded="false" />
             <element signature="e#5932#6165#0" expanded="false" />
             <element signature="e#8365#9059#0" expanded="false" />
-            <element signature="e#20581#22606#0" expanded="false" />
-            <element signature="e#22636#24779#0" expanded="false" />
-            <element signature="e#24932#26777#0" expanded="false" />
+            <element signature="e#20559#22584#0" expanded="false" />
+            <element signature="e#22614#24757#0" expanded="false" />
+            <element signature="e#24910#26757#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -877,14 +887,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/loraDirOriginal.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1481">
-          <caret line="328" column="8" lean-forward="false" selection-start-line="328" selection-start-column="8" selection-end-line="328" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="181">
@@ -897,18 +899,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/loraDirOriginal.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="373" column="8" lean-forward="false" selection-start-line="373" selection-start-column="8" selection-end-line="373" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/loraDir.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="839" column="19" lean-forward="false" selection-start-line="839" selection-start-column="19" selection-end-line="839" selection-end-column="19" />
+        <state relative-caret-position="153">
+          <caret line="292" column="37" lean-forward="true" selection-start-line="292" selection-start-column="37" selection-end-line="292" selection-end-column="37" />
           <folding>
             <element signature="e#561#2197#1" expanded="false" />
             <element signature="e#5396#5849#0" expanded="false" />
             <element signature="e#5932#6165#0" expanded="false" />
             <element signature="e#8365#9059#0" expanded="false" />
-            <element signature="e#20581#22606#0" expanded="false" />
-            <element signature="e#22636#24779#0" expanded="false" />
-            <element signature="e#24932#26777#0" expanded="false" />
+            <element signature="e#20559#22584#0" expanded="false" />
+            <element signature="e#22614#24757#0" expanded="false" />
+            <element signature="e#24910#26757#0" expanded="false" />
           </folding>
         </state>
       </provider>

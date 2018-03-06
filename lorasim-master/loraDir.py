@@ -290,8 +290,8 @@ def my_deploy(numNodes,nodes):
     while numNodes != 0:
         a = random.random()
         b = random.random()
-        posx = math.cos(2 * math.pi * a) * maxDist*2 + maxDist*2
-        posy = math.cos(2 * math.pi * b) * maxDist*2 + maxDist*5*2
+        posx = random.uniform(-80,80)
+        posy = random.uniform(-80,80)
         res = str(posx) + " " + str(posy) + "\n"
         with open(fname, 'a') as myfile:
             myfile.write(res)
@@ -421,8 +421,7 @@ class myPacket():
 
         self.nodeid = nodeid
         self.txpow = Ptx
-        Prx = self.txpow  ## zero path loss by default
-        self.rssi = Prx
+        self.Prx = self.txpow  ## zero path loss by default
         # randomize configuration values
         self.sf = 12
         self.cr = 1
@@ -439,6 +438,8 @@ class myPacket():
         # print("Distance:", distance)
         # print("Lpl:", Lpl)
         self.Prx = self.txpow - GL - Lpl
+        self.rssi = self.Prx
+        print(self.Prx)
         # for certain experiments override these
         if experiment == 1 or experiment == 0:
             self.sf = 8
@@ -710,7 +711,7 @@ def transmit(env, node):
         else:
             sensitivity = sensi[node.packet.sf - 7, [125, 250, 500].index(node.packet.bw) + 1]
             if node.packet.rssi < sensitivity:
-                print("node {}: packet will be lost".format(node.nodeid))
+                # print("node {}: packet will be lost".format(node.nodeid))
                 node.packet.lost = True
             else:
                 node.packet.lost = False
@@ -836,8 +837,8 @@ if __name__ == "__main__":
     print("maxDist:", maxDist)
 
     # base station placement
-    bsx = maxDist*2
-    bsy = maxDist*2
+    bsx = 0
+    bsy = 0
     xmax = bsx + maxDist + 20
     ymax = bsy + maxDist + 20
 
@@ -891,6 +892,7 @@ if __name__ == "__main__":
     V = 3.0  # voltage XXX
     sent = sum(n.sent for n in nodes)
     for node in nodes:
+        # print(node.packet.Prx)
         nrSfNum[node.packet.sf-7] += node.sent
         if node.packet.collided == 0 and not node.packet.lost:
             nrSfReceived[node.packet.sf-7] += 1
